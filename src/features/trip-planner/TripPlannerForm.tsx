@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Card } from "../../components/ui/Card";
-import { Input } from "../../components/ui/Input";
-import { Button } from "../../components/ui/Button";
+import React, { useState } from 'react';
+import { Card } from '../../components/ui/Card';
+import { Input } from '../../components/ui/Input';
+import { Button } from '../../components/ui/Button';
 
 interface TripPlannerFormProps {
   onGenerate: (destination: string, days: number) => void;
@@ -12,11 +12,13 @@ export const TripPlannerForm: React.FC<TripPlannerFormProps> = ({
   onGenerate,
   isLoading,
 }) => {
-  const [destination, setDestination] = useState("");
+  const [destination, setDestination] = useState('');
+  const [days, setDays] = useState(3);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onGenerate(destination || "Paris, France", 3);
+    // Use a default destination if the input is empty
+    onGenerate(destination || 'Paris, France', days);
   };
 
   return (
@@ -36,15 +38,16 @@ export const TripPlannerForm: React.FC<TripPlannerFormProps> = ({
         <Input
           label="Number of Days"
           type="number"
-          defaultValue={3}
+          value={days}
+          onChange={(e) => setDays(parseInt(e.target.value, 10) || 1)}
           min={1}
           max={14}
           className="w-full md:w-32"
           required
         />
         <Input label="Budget" placeholder="Moderate" className="flex-1" />
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Generating..." : "Generate Plan"}
+        <Button type="submit" isLoading={isLoading}>
+          {isLoading ? 'Generating...' : 'Generate Plan'}
         </Button>
       </form>
     </Card>

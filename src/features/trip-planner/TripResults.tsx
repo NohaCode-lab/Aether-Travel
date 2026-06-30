@@ -1,5 +1,4 @@
-import React from 'react';
-import { TripItinerary } from './tripTypes';
+import type { TripItinerary } from './tripTypes';
 import { TripCard } from './TripCard';
 
 interface TripResultsProps {

@@ -16,7 +16,7 @@ export default function RegisterPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    
+
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -35,10 +35,15 @@ export default function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="max-w-md w-full p-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-extrabold text-gray-900">Create an account</h2>
+          <h2 className="text-3xl font-extrabold text-gray-900">
+            Create an account
+          </h2>
           <p className="mt-2 text-sm text-gray-600">
             Already have an account?{' '}
-            <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+            <Link
+              to="/login"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
               Sign in
             </Link>
           </p>
@@ -50,11 +55,23 @@ export default function RegisterPage() {
               <p className="text-sm text-red-700">{error}</p>
             </div>
           )}
-          
-          <Input label="Email address" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-          <Input label="Password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Input
+            label="Email address"
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            label="Password"
+            type="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <Button type="submit" className="w-full" isLoading={loading}>
             {loading ? 'Creating account...' : 'Create account'}
           </Button>
         </form>

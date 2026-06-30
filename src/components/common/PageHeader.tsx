@@ -1,9 +1,9 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 
 interface PageHeaderProps {
   title: string;
   subtitle?: string;
-  action?: React.ReactNode;
+  action?: ReactNode;
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, action }) => {

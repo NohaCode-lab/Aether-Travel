@@ -1,11 +1,10 @@
-import React from "react";
-import { Card } from "../../components/ui/Card";
+import { Card } from '../../components/ui/Card';
 
 export const DashboardStats: React.FC = () => {
   const stats = [
-    { label: "Total Trips Planned", value: "12" },
-    { label: "Countries Visited", value: "5" },
-    { label: "Estimated Savings", value: "$850" },
+    { label: 'Total Trips Planned', value: '12' },
+    { label: 'Countries Visited', value: '5' },
+    { label: 'Estimated Savings', value: '$850' },
   ];
 
   return (

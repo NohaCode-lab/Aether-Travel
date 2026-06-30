@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from "react";
+import React, { type InputHTMLAttributes, useId } from 'react';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -8,11 +8,12 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export const Input: React.FC<InputProps> = ({
   label,
   error,
-  className = "",
+  className = '',
   id,
   ...props
 }) => {
-  const inputId = id || Math.random().toString(36).substring(7);
+  const fallbackId = useId();
+  const inputId = id || fallbackId;
 
   return (
     <div className={`flex flex-col ${className}`}>
@@ -27,7 +28,7 @@ export const Input: React.FC<InputProps> = ({
       <input
         id={inputId}
         className={`block w-full rounded-md shadow-sm sm:text-sm p-2 border focus:ring-indigo-500 focus:border-indigo-500 ${
-          error ? "border-red-300" : "border-gray-300"
+          error ? 'border-red-300' : 'border-gray-300'
         }`}
         {...props}
       />

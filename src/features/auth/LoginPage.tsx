@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Card } from "../../components/ui/Card";
-import { Input } from "../../components/ui/Input";
-import { Button } from "../../components/ui/Button";
-import { authService } from "./authService";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Card } from '../../components/ui/Card';
+import { Input } from '../../components/ui/Input';
+import { Button } from '../../components/ui/Button';
+import { authService } from './authService';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
+    setError('');
 
     try {
       await authService.login(email, password);
-      navigate("/"); // Redirect user to dashboard after successful login
+      navigate('/'); // Redirect user to dashboard after successful login
     } catch (err: unknown) {
       console.error(err);
-      setError(err instanceof Error ? err.message : "بيانات الدخول غير صحيحة");
+      setError(err instanceof Error ? err.message : 'بيانات الدخول غير صحيحة');
     } finally {
       setIsLoading(false);
     }
@@ -66,13 +66,13 @@ export default function LoginPage() {
             />
 
             <Button type="submit" className="w-full mt-2" isLoading={isLoading}>
-              تسجيل الدخول
+              {isLoading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول'}
             </Button>
           </form>
         </Card>
 
         <p className="text-center mt-6 text-gray-600 dark:text-gray-400">
-          ليس لديك حساب؟{" "}
+          ليس لديك حساب؟{' '}
           <Link
             to="/register"
             className="text-blue-600 dark:text-blue-400 hover:underline font-medium"

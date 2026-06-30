@@ -1,30 +1,89 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Card } from '../../components/ui/Card';
 import { Input } from '../../components/ui/Input';
 import { Button } from '../../components/ui/Button';
-import { Card } from '../../components/ui/Card';
+import {
+  getUserProfile,
+  updateUserProfile,
+  type UserProfile,
+} from './profileService';
+import { Loader } from '../../components/ui/Loader';
 
 export const ProfileForm: React.FC = () => {
-  return (
-    <Card className="p-6">
-      <form className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Input label="First Name" defaultValue="John" />
-          <Input label="Last Name" defaultValue="Doe" />
-        </div>
-        <Input label="Email Address" type="email" defaultValue="john.doe@example.com" />
-        <Input label="Phone Number" type="tel" placeholder="+1 (555) 000-0000" />
-        
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
-          <textarea 
-            className="w-full rounded-md border border-gray-300 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500" 
-            rows={4}
-            placeholder="Tell us a bit about your travel style..."
-          ></textarea>
-        </div>
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const userProfile = await getUserProfile();
+      setProfile(userProfile);
+      setLoading(false);
+    };
+    fetchProfile();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (profile) {
+      setProfile({ ...profile, [e.target.name]: e.target.value });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (profile) {
+      setSaving(true);
+      await updateUserProfile(profile);
+      setSaving(false);
+      // Here you might want to show a success message
+    }
+  };
+
+  if (loading || !profile) {
+    return <Loader />;
+  }
+
+  return (
+    <Card className="max-w-2xl mx-auto p-8">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Input
+            label="First Name"
+            name="firstName"
+            value={profile.firstName}
+            onChange={handleChange}
+          />
+          <Input
+            label="Last Name"
+            name="lastName"
+            value={profile.lastName}
+            onChange={handleChange}
+          />
+        </div>
+        <Input
+          label="Email"
+          type="email"
+          name="email"
+          value={profile.email}
+          onChange={handleChange}
+          disabled // Usually email is not editable
+        />
+        <Input
+          label="Phone Number"
+          name="phone"
+          value={profile.phone}
+          onChange={handleChange}
+        />
+        <Input
+          label="Bio"
+          name="bio"
+          value={profile.bio}
+          onChange={handleChange}
+        />
         <div className="flex justify-end">
-          <Button type="button" variant="primary">Save Changes</Button>
+          <Button type="submit" isLoading={saving}>
+            {saving ? 'Saving...' : 'Save Changes'}
+          </Button>
         </div>
       </form>
     </Card>

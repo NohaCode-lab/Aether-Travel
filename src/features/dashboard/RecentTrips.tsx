@@ -1,26 +1,25 @@
-import React from "react";
-import { Card } from "../../components/ui/Card";
-import { Badge } from "../../components/ui/Badge";
+import { Card } from '../../components/ui/Card';
+import { Badge } from '../../components/ui/Badge';
 
 export const RecentTrips: React.FC = () => {
   const trips = [
     {
       id: 1,
-      destination: "Tokyo, Japan",
-      date: "Oct 10 - Oct 24, 2024",
-      status: "Upcoming",
+      destination: 'Tokyo, Japan',
+      date: 'Oct 10 - Oct 24, 2024',
+      status: 'Upcoming',
     },
     {
       id: 2,
-      destination: "Paris, France",
-      date: "Jul 1 - Jul 10, 2024",
-      status: "Completed",
+      destination: 'Paris, France',
+      date: 'Jul 1 - Jul 10, 2024',
+      status: 'Completed',
     },
     {
       id: 3,
-      destination: "Bali, Indonesia",
-      date: "Dec 5 - Dec 15, 2024",
-      status: "Draft",
+      destination: 'Bali, Indonesia',
+      date: 'Dec 5 - Dec 15, 2024',
+      status: 'Draft',
     },
   ];
 
@@ -41,11 +40,11 @@ export const RecentTrips: React.FC = () => {
             </div>
             <Badge
               variant={
-                trip.status === "Upcoming"
-                  ? "primary"
-                  : trip.status === "Completed"
-                    ? "success"
-                    : "secondary"
+                trip.status === 'Upcoming'
+                  ? 'primary'
+                  : trip.status === 'Completed'
+                    ? 'success'
+                    : 'secondary'
               }
             >
               {trip.status}
