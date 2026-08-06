@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "destinations": "Destinations",
+    "tripPlanner": "Trip Planner",
+    "aiConcierge": "AI Concierge",
+    "bookings": "Bookings",
+    "profile": "Profile",
+    "login": "Sign In",
+    "register": "Register",
+    "logout": "Log Out"
+  },
+  "common": {
+    "welcome": "Welcome back",
+    "traveler": "Traveler",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search...",
+    "filter": "Filter",
+    "language": "Language",
+    "english": "English",
+    "german": "Deutsch"
+  },
+  "dashboard": {
+    "title": "Welcome back",
+    "subtitle": "Here is an overview of your AI-curated journeys and travel plans.",
+    "myTrips": "My Trips",
+    "noTripsTitle": "No Trips Planned Yet",
+    "noTripsDesc": "Start exploring intelligent itineraries created by your AI Travel Architect.",
+    "planTrip": "Plan a New Trip",
+    "viewDetails": "View Details"
+  },
+  "destinations": {
+    "title": "Discover Destinations",
+    "subtitle": "Explore curated world destinations with smart budget and climate insights.",
+    "searchPlaceholder": "Search by country, city, or region...",
+    "pricePerNight": "/ night",
+    "bookNow": "Book Trip",
+    "rating": "Rating"
+  },
+  "ai": {
+    "title": "AI Travel Concierge",
+    "subtitle": "Ask anything about travel, request custom itineraries, or optimize your travel budget.",
+    "placeholder": "e.g., Plan a 7-day trip to Munich, Germany on a budget...",
+    "send": "Send",
+    "thinking": "AI Travel Architect is planning..."
+  },
+  "booking": {
+    "title": "My Bookings",
+    "subtitle": "Manage your confirmed and upcoming travel reservations.",
+    "statusPending": "Pending",
+    "statusConfirmed": "Confirmed",
+    "statusCancelled": "Cancelled",
+    "totalAmount": "Total Amount",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "guests": "Guests",
+    "confirmBooking": "Confirm Reservation"
+  }
+}

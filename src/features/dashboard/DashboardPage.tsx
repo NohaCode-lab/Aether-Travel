@@ -1,4 +1,6 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks/useAuth';
 import { useTrips } from '../../hooks/useTrips';
 import { Card } from '../../components/ui/Card';
@@ -8,19 +10,24 @@ import { Button } from '../../components/ui/Button';
 
 export const DashboardPage: React.FC = () => {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const { trips, loading: tripsLoading } = useTrips(user?.id ?? null);
 
   return (
-    <div className="animate-fade-in">
-      <h1 className="text-3xl font-bold text-gray-900">
-        Welcome back, {user?.user_metadata?.firstName || 'Traveler'}!
-      </h1>
-      <p className="mt-2 text-lg text-gray-600">
-        Here's a look at your upcoming adventures.
-      </p>
+    <div className="animate-fade-in space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          {t('dashboard.title')}, {user?.user_metadata?.firstName || t('common.traveler')}!
+        </h1>
+        <p className="mt-1 text-base text-gray-600 dark:text-gray-400">
+          {t('dashboard.subtitle')}
+        </p>
+      </div>
 
       <div className="mt-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">My Trips</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+          {t('dashboard.myTrips')}
+        </h2>
         {tripsLoading ? (
           <Loader />
         ) : trips.length > 0 ? (
@@ -30,11 +37,11 @@ export const DashboardPage: React.FC = () => {
                 <img
                   src={trip.image}
                   alt={trip.destination}
-                  className="w-full h-40 object-cover rounded-md mb-4"
+                  className="w-full h-40 object-cover rounded-xl mb-4"
                 />
-                <h3 className="text-xl font-bold">{trip.destination}</h3>
-                <p className="text-gray-500">{trip.country}</p>
-                <p className="text-sm text-gray-600 mt-2">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{trip.destination}</h3>
+                <p className="text-gray-500 dark:text-gray-400">{trip.country}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 font-mono">
                   {trip.startDate} - {trip.endDate}
                 </p>
               </Card>
@@ -42,11 +49,11 @@ export const DashboardPage: React.FC = () => {
           </div>
         ) : (
           <EmptyState
-            title="No Trips Planned"
-            description="You haven't planned any trips yet. Let's change that!"
+            title={t('dashboard.noTripsTitle')}
+            description={t('dashboard.noTripsDesc')}
             action={
               <Link to="/trip-planner">
-                <Button>Plan a New Trip</Button>
+                <Button>{t('dashboard.planTrip')}</Button>
               </Link>
             }
           />

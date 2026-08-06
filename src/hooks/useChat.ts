@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { openai } from '../services/openai';
+import { aiService } from '../services/aiService';
 
 export interface ChatMessage {
   id: string;
@@ -18,18 +18,14 @@ export const useChat = () => {
       content,
     };
 
-    setMessages((prev) => [...prev, newUserMessage]);
+    const newMessages = [...messages, newUserMessage];
+    setMessages(newMessages);
     setIsLoading(true);
 
     try {
-      const response = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
-        messages: [...messages, newUserMessage].map(({ role, content }) => ({ role, content })),
-      });
-
-      const aiContent = response.choices[0]?.message?.content;
-      if (aiContent) {
-        setMessages((prev) => [...prev, { id: (Date.now() + 1).toString(), role: 'assistant', content: aiContent }]);
+      const reply = await aiService.sendMessage(newMessages.map(({ role, content }) => ({ role, content })));
+      if (reply) {
+        setMessages((prev) => [...prev, { id: (Date.now() + 1).toString(), role: 'assistant', content: reply }]);
       }
     } catch (error) {
       console.error('Failed to send message:', error);

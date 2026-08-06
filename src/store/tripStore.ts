@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { supabase } from "./supabase";
+import { supabase } from "../services/supabase";
 
 // In a real app, this would likely be in a shared `types` directory.
 export interface Trip {

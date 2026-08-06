@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "destinations": "Reiseziele",
+    "tripPlanner": "Reiseplaner",
+    "aiConcierge": "KI-Concierge",
+    "bookings": "Buchungen",
+    "profile": "Profil",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden"
+  },
+  "common": {
+    "welcome": "Willkommen zurück",
+    "traveler": "Reisender",
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "success": "Erfolg",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "search": "Suchen...",
+    "filter": "Filter",
+    "language": "Sprache",
+    "english": "English",
+    "german": "Deutsch"
+  },
+  "dashboard": {
+    "title": "Willkommen zurück",
+    "subtitle": "Hier ist eine Übersicht Ihrer von KI zusammengestellten Reisen und Reisepläne.",
+    "myTrips": "Meine Reisen",
+    "noTripsTitle": "Noch keine Reisen geplant",
+    "noTripsDesc": "Entdecken Sie intelligente Reiserouten, die von Ihrem KI-Reisearchitekten erstellt wurden.",
+    "planTrip": "Neue Reise planen",
+    "viewDetails": "Details anzeigen"
+  },
+  "destinations": {
+    "title": "Reiseziele entdecken",
+    "subtitle": "Erkunden Sie ausgewählte Weltreiseziele mit smarten Budget- und Klima-Einblicken.",
+    "searchPlaceholder": "Nach Land, Stadt oder Region suchen...",
+    "pricePerNight": "/ Nacht",
+    "bookNow": "Reise buchen",
+    "rating": "Bewertung"
+  },
+  "ai": {
+    "title": "KI-Reise-Concierge",
+    "subtitle": "Fragen Sie alles über Reisen, fordern Sie individuelle Reiserouten an oder optimieren Sie Ihr Budget.",
+    "placeholder": "z.B. Planen Sie eine 7-tägige Reise nach München...",
+    "send": "Senden",
+    "thinking": "KI-Reisearchitekt plant..."
+  },
+  "booking": {
+    "title": "Meine Buchungen",
+    "subtitle": "Verwalten Sie Ihre bestätigten und bevorstehenden Reisereservierungen.",
+    "statusPending": "Ausstehend",
+    "statusConfirmed": "Bestätigt",
+    "statusCancelled": "Storniert",
+    "totalAmount": "Gesamtbetrag",
+    "startDate": "Startdatum",
+    "endDate": "Enddatum",
+    "guests": "Gäste",
+    "confirmBooking": "Reservierung bestätigen"
+  }
+}

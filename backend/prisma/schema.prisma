@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+model User {
+  id           String          @id @default(uuid())
+  email        String          @unique
+  passwordHash String
+  firstName    String?
+  lastName     String?
+  role         Role            @default(USER)
+  avatarUrl    String?
+  language     String          @default("en")
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  bookings     Booking[]
+  travelPlans  TravelPlan[]
+  conversations AIConversation[]
+  reviews      Review[]
+}
+
+model Destination {
+  id            String    @id @default(uuid())
+  name          String
+  country       String
+  region        String?
+  description   String
+  imageUrl      String
+  pricePerNight Float
+  rating        Float     @default(4.8)
+  tags          String[]
+  createdAt     DateTime  @default(now())
+  bookings      Booking[]
+  reviews       Review[]
+}
+
+model Booking {
+  id            String        @id @default(uuid())
+  userId        String
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  destinationId String
+  destination   Destination   @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  startDate     DateTime
+  endDate       DateTime
+  guests        Int           @default(1)
+  totalAmount   Float
+  status        BookingStatus @default(PENDING)
+  createdAt     DateTime      @default(now())
+}
+
+model TravelPlan {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title         String
+  destination   String
+  startDate     DateTime
+  endDate       DateTime
+  itineraryJson Json
+  budget        Float
+  createdAt     DateTime @default(now())
+}
+
+model AIConversation {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  messages  Json
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id            String      @id @default(uuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  destinationId String
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  rating        Int
+  comment       String
+  createdAt     DateTime    @default(now())
+}

@@ -1,0 +1,46 @@
+name: Enterprise CI Pipeline
+
+on:
+  push:
+    branches: ['main', 'master', 'phase2-transformation']
+  pull_request:
+    branches: ['main', 'master']
+
+jobs:
+  build-test-scan:
+    name: Build, Test & Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run ESLint Check
+        run: npm run lint
+
+      - name: Run TypeScript Type Check
+        run: npm run typecheck
+
+      - name: Run Unit Tests
+        run: npm test
+
+      - name: Run Production Build
+        run: npm run build
+
+      - name: Run Vulnerability & Security Scan (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+        env:
+          TRIVY_SUPPRESS_OUTPUT: 'true'

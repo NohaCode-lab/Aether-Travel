@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Card } from '../../components/ui/Card';
 import { Input } from '../../components/ui/Input';
 import { Button } from '../../components/ui/Button';
 import { authService } from './authService';
+import { LanguageSwitcher } from '../../components/shared/LanguageSwitcher';
 
 export default function LoginPage() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -19,24 +22,28 @@ export default function LoginPage() {
 
     try {
       await authService.login(email, password);
-      navigate('/'); // Redirect user to dashboard after successful login
+      navigate('/');
     } catch (err: unknown) {
       console.error(err);
-      setError(err instanceof Error ? err.message : 'بيانات الدخول غير صحيحة');
+      setError(err instanceof Error ? err.message : t('common.error'));
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 relative">
+      <div className="absolute top-4 right-4">
+        <LanguageSwitcher />
+      </div>
+
       <div className="w-full max-w-md animate-fade-in">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            مرحباً بعودتك
+            {t('nav.login')}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            قم بتسجيل الدخول للوصول إلى رحلاتك
+            {t('dashboard.subtitle')}
           </p>
         </div>
 
@@ -49,7 +56,7 @@ export default function LoginPage() {
             )}
 
             <Input
-              label="البريد الإلكتروني"
+              label="Email"
               type="email"
               placeholder="name@example.com"
               value={email}
@@ -57,7 +64,7 @@ export default function LoginPage() {
               required
             />
             <Input
-              label="كلمة المرور"
+              label="Password"
               type="password"
               placeholder="••••••••"
               value={password}
@@ -66,18 +73,18 @@ export default function LoginPage() {
             />
 
             <Button type="submit" className="w-full mt-2" isLoading={isLoading}>
-              {isLoading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول'}
+              {isLoading ? t('common.loading') : t('nav.login')}
             </Button>
           </form>
         </Card>
 
-        <p className="text-center mt-6 text-gray-600 dark:text-gray-400">
-          ليس لديك حساب؟{' '}
+        <p className="text-center mt-6 text-gray-600 dark:text-gray-400 text-sm">
+          Don't have an account?{' '}
           <Link
             to="/register"
-            className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+            className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
           >
-            إنشاء حساب جديد
+            {t('nav.register')}
           </Link>
         </p>
       </div>
