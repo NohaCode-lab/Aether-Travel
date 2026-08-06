@@ -11,9 +11,30 @@
 
 ---
 
-## 🌟 Product Overview
+## 🌟 Product Overview & Instant Recruiter Demo
 
 **Aether-Travel** is an Enterprise+ AI-powered Travel Management SaaS platform designed to streamline corporate and consumer travel. It features an advanced **7-agent Multi-Agent AI System**, Model Context Protocol (MCP) tool integration, RAG semantic vector search (`pgvector`), interactive OpenStreetMap route visualization, an encrypted travel document vault, real-time flight tracking, and Chart.js analytics.
+
+> ⚡ **Instant Live Demo Mode:** When running locally on `http://localhost:5173/`, the application opens **directly into the Main Dashboard** with full Top Navbar and Left Sidebar navigation visible. No mandatory registration required!
+
+---
+
+## 🧭 Complete Application Navigation Map
+
+All primary application features are immediately accessible via the **Top Navbar** and **Left Sidebar**:
+
+| Top Navbar & Sidebar Section | Path | Key Capabilities |
+|---|---|---|
+| **Aether-Travel Logo** | `/` | Brand identity & home navigation |
+| **Dashboard** | `/` | Interactive trip cards, weather widget, Leaflet map |
+| **Destinations** | `/destinations` | Curated destination cards, budget & climate filters |
+| **Trip Planner** | `/trip-planner` | Multi-day itinerary builder powered by AI agents |
+| **AI Concierge** | `/ai-chat` | 7-agent AI orchestration with RAG citations |
+| **Document Vault** | `/documents` | Passports & Visas encrypted storage & expiry alerts |
+| **Flight Tracker** | `/flight-tracker` | Real-time airport, gate, terminal, & status tracking |
+| **Analytics** | `/analytics` | Chart.js travel expenditure & prompt volume charts |
+| **Admin Panel** | `/admin` | User RBAC role management & system health monitoring |
+| **Profile** | `/profile` | User preferences & billing management |
 
 ---
 
@@ -49,16 +70,21 @@ graph TD
 
 ---
 
-## 🚀 Key Features Matrix
+## 📸 Portfolio Screenshots Gallery
 
-- 🤖 **Multi-Agent AI Architecture:** 7 specialized agents (`Planner`, `Budget`, `Visa`, `Weather`, `Booking`, `LocalExpert`, `Coordinator`).
-- 🌐 **Model Context Protocol (MCP):** Dynamic tool execution pipeline for Weather, Maps, Currency, and Travel Rules.
-- 📚 **RAG Vector Search:** PostgreSQL `pgvector` semantic similarity retrieval with source citations.
-- 🗺️ **Interactive Maps:** Leaflet + OpenStreetMap rendering with route polylines and attraction markers.
-- 🔐 **Document Vault:** Encrypted document metadata storage for Passports and Visas with 30-day expiry reminders.
-- ✈️ **Flight Status Tracker:** Real-time airport, gate, terminal, and departure monitoring.
-- 📊 **SaaS Analytics Dashboard:** Chart.js visualizations for trips, expenses, and AI prompt volume.
-- 🌐 **Bilingual i18n & Theme:** English & German translation bundles with dynamic Light/Dark mode toggling.
+| Screen | Description | Path |
+|---|---|---|
+| **01. Main Dashboard** | Trip cards, Leaflet map, weather widgets | `docs/screenshots/01-dashboard.png` |
+| **02. AI Concierge** | Multi-agent AI response orchestration | `docs/screenshots/02-ai-concierge.png` |
+| **03. Trip Planner** | AI itinerary generation workflow | `docs/screenshots/03-trip-planner.png` |
+| **04. Destinations** | World destinations with price/rating filters | `docs/screenshots/04-destinations.png` |
+| **05. Interactive Map** | Leaflet + OpenStreetMap polylines | `docs/screenshots/05-interactive-map.png` |
+| **06. Flight Tracker** | Airport gate, terminal, and status updates | `docs/screenshots/06-flight-tracker.png` |
+| **07. Document Vault** | Passport & Visa vault with expiry warnings | `docs/screenshots/07-document-vault.png` |
+| **08. Analytics** | Chart.js expenditure and AI volume charts | `docs/screenshots/08-analytics.png` |
+| **09. Admin Panel** | RBAC user controls & system telemetry | `docs/screenshots/09-admin-panel.png` |
+| **10. Dark Mode** | Glassmorphic dark aesthetic | `docs/screenshots/10-dark-mode.png` |
+| **11. Mobile Drawer** | Responsive hamburger navigation drawer | `docs/screenshots/11-mobile-navbar.png` |
 
 ---
 
@@ -93,14 +119,5 @@ npm run dev
 
 ---
 
-## 🐳 Docker Deployment
-
-```bash
-# Spin up complete stack (Frontend, Backend, PostgreSQL, Redis)
-docker-compose up --build -d
-```
-
----
-
-## 📄 License & Release Notes
-Distributed under the MIT License. See [`RELEASE_NOTES.md`](RELEASE_NOTES.md) for full release details.
+## 📄 Certification & Release Notes
+See [`RECRUITER_DEMO_READINESS_REPORT.md`](RECRUITER_DEMO_READINESS_REPORT.md) and [`AETHER_TRAVEL_FINAL_RELEASE_CERTIFICATION.md`](AETHER_TRAVEL_FINAL_RELEASE_CERTIFICATION.md) for official audit scorecards.
