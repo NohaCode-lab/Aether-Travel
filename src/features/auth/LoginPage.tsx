@@ -6,6 +6,8 @@ import { Input } from '../../components/ui/Input';
 import { Button } from '../../components/ui/Button';
 import { authService } from './authService';
 import { LanguageSwitcher } from '../../components/shared/LanguageSwitcher';
+import { ThemeToggle } from '../../components/shared/ThemeToggle';
+import { Logo } from '../../components/shared/Logo';
 
 export default function LoginPage() {
   const { t } = useTranslation();
@@ -33,16 +35,15 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 relative">
-      <div className="absolute top-4 right-4">
+      <div className="absolute top-4 right-4 flex items-center gap-2">
+        <ThemeToggle />
         <LanguageSwitcher />
       </div>
 
-      <div className="w-full max-w-md animate-fade-in">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            {t('nav.login')}
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+      <div className="w-full max-w-md animate-fade-in space-y-6">
+        <div className="flex flex-col items-center justify-center text-center">
+          <Logo size="lg" />
+          <p className="text-gray-600 dark:text-gray-400 text-sm mt-3">
             {t('dashboard.subtitle')}
           </p>
         </div>
@@ -78,7 +79,7 @@ export default function LoginPage() {
           </form>
         </Card>
 
-        <p className="text-center mt-6 text-gray-600 dark:text-gray-400 text-sm">
+        <p className="text-center text-gray-600 dark:text-gray-400 text-sm">
           Don't have an account?{' '}
           <Link
             to="/register"

@@ -1,29 +1,38 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
   <defs>
-    <linearGradient id="aether-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#6366f1" />
-      <stop offset="50%" stop-color="#8b5cf6" />
-      <stop offset="100%" stop-color="#d946ef" />
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="50%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#db2777" />
     </linearGradient>
-    <linearGradient id="aether-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="plane-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e0e7ff" />
+    </linearGradient>
+    <linearGradient id="accent-glow" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#38bdf8" />
       <stop offset="100%" stop-color="#818cf8" />
     </linearGradient>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#6366f1" flood-opacity="0.3" />
-    </filter>
   </defs>
-  <!-- Background Shield -->
-  <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#aether-grad)" filter="url(#shadow)" />
   
-  <!-- Outer Compass Ring -->
-  <circle cx="256" cy="256" r="160" stroke="#ffffff" stroke-opacity="0.25" stroke-width="12" stroke-dasharray="16 12" />
+  <!-- Outer Rounded Container -->
+  <rect width="512" height="512" rx="128" fill="url(#bg-grad)" />
   
-  <!-- Stylized Compass / Flight Needle -->
-  <path d="M256 96 L296 230 L416 256 L296 282 L256 416 L216 282 L96 256 L216 230 Z" fill="#ffffff" />
-  <path d="M256 96 L296 230 L256 256 L216 230 Z" fill="url(#aether-glow)" />
-  <path d="M256 256 L296 282 L256 416 L216 282 Z" fill="#ffffff" opacity="0.8" />
+  <!-- Outer Decorative Ring -->
+  <circle cx="256" cy="256" r="180" stroke="#ffffff" stroke-opacity="0.25" stroke-width="12" stroke-dasharray="24 16" />
   
-  <!-- Center Orb -->
-  <circle cx="256" cy="256" r="28" fill="url(#aether-grad)" stroke="#ffffff" stroke-width="6" />
+  <!-- AI Sparkle Orbit Ring -->
+  <ellipse cx="256" cy="256" rx="210" ry="80" transform="rotate(-30 256 256)" stroke="url(#accent-glow)" stroke-width="10" stroke-dasharray="12 12" />
+  
+  <!-- Airplane Geometry (Stylized Supersonic Wing) -->
+  <path d="M256 80 L300 220 L440 256 L300 292 L256 432 L212 292 L72 256 L212 220 Z" fill="url(#plane-grad)" />
+  
+  <!-- Inner Dynamic Shading -->
+  <path d="M256 80 L300 220 L256 256 L212 220 Z" fill="#ffffff" opacity="0.9" />
+  <path d="M256 256 L440 256 L300 292 Z" fill="#c7d2fe" opacity="0.8" />
+  <path d="M256 256 L256 432 L212 292 Z" fill="#a5b4fc" opacity="0.9" />
+  
+  <!-- Center AI Core Gem -->
+  <circle cx="256" cy="256" r="32" fill="url(#bg-grad)" stroke="#ffffff" stroke-width="8" />
+  <circle cx="256" cy="256" r="12" fill="#38bdf8" />
 </svg>
