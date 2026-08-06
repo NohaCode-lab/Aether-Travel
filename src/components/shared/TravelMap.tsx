@@ -1,5 +1,4 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -35,7 +34,7 @@ interface TravelMapProps {
 }
 
 export const TravelMap: React.FC<TravelMapProps> = ({
-  center = [48.1351, 11.5820], // Default Munich
+  center = [48.1351, 11.5820],
   zoom = 12,
   markers = [],
   routePath = [],
@@ -43,45 +42,69 @@ export const TravelMap: React.FC<TravelMapProps> = ({
   distanceKm = 4.2,
   className = 'h-96 w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-md',
 }) => {
-  const getBadgeColor = (category: MapMarker['category']) => {
-    switch (category) {
-      case 'hotel':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300';
-      case 'restaurant':
-        return 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300';
-      case 'airport':
-      case 'station':
-        return 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300';
-      default:
-        return 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300';
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const mapInstanceRef = useRef<L.Map | null>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    // Destroy existing Leaflet map instance if present
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.remove();
+      mapInstanceRef.current = null;
     }
-  };
+
+    // Reset leftover _leaflet_id DOM property to prevent "Map container is already initialized"
+    if ((containerRef.current as any)._leaflet_id) {
+      (containerRef.current as any)._leaflet_id = null;
+    }
+
+    const map = L.map(containerRef.current, {
+      center,
+      zoom,
+      scrollWheelZoom: false,
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    markers.forEach((m) => {
+      const marker = L.marker([m.lat, m.lng]).addTo(map);
+      marker.bindPopup(`
+        <div class="p-1 space-y-1">
+          <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider bg-indigo-100 text-indigo-800">
+            ${m.category}
+          </span>
+          <h4 class="font-bold text-gray-900 text-sm">${m.title}</h4>
+          ${m.description ? `<p class="text-xs text-gray-600 leading-tight">${m.description}</p>` : ''}
+        </div>
+      `);
+    });
+
+    if (routePath.length > 1) {
+      L.polyline(routePath, {
+        color: '#6366f1',
+        weight: 5,
+        opacity: 0.8,
+        dashArray: '8, 8',
+      }).addTo(map);
+    }
+
+    mapInstanceRef.current = map;
+
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, [center, zoom, markers, routePath]);
 
   return (
     <div className="relative group">
       <div className={className}>
-        <MapContainer center={center} zoom={zoom} scrollWheelZoom={false} className="h-full w-full">
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {markers.map((marker) => (
-            <Marker key={marker.id} position={[marker.lat, marker.lng]}>
-              <Popup>
-                <div className="p-1 space-y-1">
-                  <span className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider ${getBadgeColor(marker.category)}`}>
-                    {marker.category}
-                  </span>
-                  <h4 className="font-bold text-gray-900 text-sm">{marker.title}</h4>
-                  {marker.description && <p className="text-xs text-gray-600 leading-tight">{marker.description}</p>}
-                </div>
-              </Popup>
-            </Marker>
-          ))}
-          {routePath.length > 1 && (
-            <Polyline positions={routePath} color="#6366f1" weight={5} opacity={0.8} dashArray="8, 8" />
-          )}
-        </MapContainer>
+        <div ref={containerRef} className="h-full w-full z-10" />
       </div>
 
       {/* Map overlay metrics card */}
