@@ -3,19 +3,25 @@ import { persist } from "zustand/middleware";
 
 interface ThemeState {
   theme: "light" | "dark";
-  language: "en" | "ar";
   setTheme: (theme: "light" | "dark") => void;
-  setLanguage: (lang: "en" | "ar") => void;
+  toggleTheme: () => void;
 }
 
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
       theme: "light",
-      language: "en",
-      setTheme: (theme) => set({ theme }),
-      setLanguage: (language) => set({ language }),
+      setTheme: (theme) => {
+        document.documentElement.classList.toggle("dark", theme === "dark");
+        set({ theme });
+      },
+      toggleTheme: () =>
+        set((state) => {
+          const nextTheme = state.theme === "light" ? "dark" : "light";
+          document.documentElement.classList.toggle("dark", nextTheme === "dark");
+          return { theme: nextTheme };
+        }),
     }),
-    { name: "travelmind-theme-store" },
-  ),
+    { name: "aether-theme-store" }
+  )
 );

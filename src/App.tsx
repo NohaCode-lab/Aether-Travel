@@ -10,31 +10,26 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 1000 * 60 * 5,
-      retry: 1, // Don't retry indefinitely on failure
+      retry: 1,
       refetchOnWindowFocus: false,
     },
   },
 });
 
 export default function App() {
-  const { theme, language } = useThemeStore();
+  const { theme } = useThemeStore();
   const { setUser, setLoading } = useAuthStore();
 
   useEffect(() => {
-    // Apply Theme and RTL logic
     document.documentElement.classList.toggle("dark", theme === "dark");
-    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-    document.documentElement.lang = language;
-  }, [theme, language]);
+  }, [theme]);
 
   useEffect(() => {
-    // Check current session on app load
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
       setLoading(false);
     });
 
-    // Listen for any login/logout state changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
