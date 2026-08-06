@@ -1,38 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
   <defs>
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#4f46e5" />
-      <stop offset="50%" stop-color="#7c3aed" />
-      <stop offset="100%" stop-color="#db2777" />
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d9488" />
+      <stop offset="50%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#0284c7" />
     </linearGradient>
-    <linearGradient id="plane-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="100%" stop-color="#e0e7ff" />
+      <stop offset="100%" stop-color="#e0f2fe" />
     </linearGradient>
-    <linearGradient id="accent-glow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="100%" stop-color="#818cf8" />
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#34d399" stop-opacity="0.3" />
     </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
   </defs>
+
+  <!-- Background Hexagon/Rounded Shield -->
+  <rect x="5" y="5" width="90" height="90" rx="28" fill="url(#bgGrad)" />
   
-  <!-- Outer Rounded Container -->
-  <rect width="512" height="512" rx="128" fill="url(#bg-grad)" />
+  <!-- Outer Orbital Flight Path Ring -->
+  <ellipse cx="50" cy="50" rx="36" ry="16" transform="rotate(-30 50 50)" stroke="url(#ringGrad)" stroke-width="3.5" stroke-dasharray="6 4" />
   
-  <!-- Outer Decorative Ring -->
-  <circle cx="256" cy="256" r="180" stroke="#ffffff" stroke-opacity="0.25" stroke-width="12" stroke-dasharray="24 16" />
-  
-  <!-- AI Sparkle Orbit Ring -->
-  <ellipse cx="256" cy="256" rx="210" ry="80" transform="rotate(-30 256 256)" stroke="url(#accent-glow)" stroke-width="10" stroke-dasharray="12 12" />
-  
-  <!-- Airplane Geometry (Stylized Supersonic Wing) -->
-  <path d="M256 80 L300 220 L440 256 L300 292 L256 432 L212 292 L72 256 L212 220 Z" fill="url(#plane-grad)" />
-  
-  <!-- Inner Dynamic Shading -->
-  <path d="M256 80 L300 220 L256 256 L212 220 Z" fill="#ffffff" opacity="0.9" />
-  <path d="M256 256 L440 256 L300 292 Z" fill="#c7d2fe" opacity="0.8" />
-  <path d="M256 256 L256 432 L212 292 Z" fill="#a5b4fc" opacity="0.9" />
-  
-  <!-- Center AI Core Gem -->
-  <circle cx="256" cy="256" r="32" fill="url(#bg-grad)" stroke="#ffffff" stroke-width="8" />
-  <circle cx="256" cy="256" r="12" fill="#38bdf8" />
+  <!-- Mini Orbiting Airplane Icon -->
+  <path d="M78 30 L84 28 L82 34 L76 32 Z" fill="#38bdf8" filter="url(#glow)" />
+
+  <!-- Central Compass Rose / AI Starburst -->
+  <g filter="url(#glow)">
+    <!-- Vertical & Horizontal Compass Points -->
+    <path d="M50 16 L56 44 L50 50 L44 44 Z" fill="url(#starGrad)" />
+    <path d="M50 84 L56 56 L50 50 L44 56 Z" fill="url(#starGrad)" opacity="0.85" />
+    <path d="M84 50 L56 56 L50 50 L56 44 Z" fill="url(#starGrad)" opacity="0.9" />
+    <path d="M16 50 L44 56 L50 50 L44 44 Z" fill="url(#starGrad)" opacity="0.8" />
+
+    <!-- Diagonal Accent Points -->
+    <path d="M50 50 L68 32 L56 44 Z" fill="#38bdf8" />
+    <path d="M50 50 L32 68 L44 56 Z" fill="#34d399" />
+    
+    <!-- Core Gem -->
+    <circle cx="50" cy="50" r="5" fill="#0f172a" />
+    <circle cx="50" cy="50" r="3" fill="#38bdf8" />
+  </g>
 </svg>

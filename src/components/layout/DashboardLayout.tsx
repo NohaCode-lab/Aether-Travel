@@ -12,9 +12,9 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   return (
     <div className="min-h-screen flex flex-col bg-transparent">
       <Navbar />
-      <div className="flex flex-1 max-w-7xl w-full mx-auto">
+      <div className="flex flex-1 w-full">
         <Sidebar />
-        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto">{children}</main>
+        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto max-w-full">{children}</main>
       </div>
     </div>
   );

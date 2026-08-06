@@ -37,13 +37,13 @@ export const Navbar = () => {
   ];
 
   return (
-    <header className="bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl border-b border-teal-100/80 dark:border-teal-900/40 shadow-sm sticky top-0 z-40 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl border-b border-teal-100/80 dark:border-teal-900/40 shadow-sm sticky top-0 z-40 transition-colors w-full">
+      <div className="w-full px-4 sm:px-6 md:px-8">
         <div className="flex justify-between items-center h-16 gap-4">
           <Logo size="md" />
 
           {/* Top Navbar Section Navigation Links (Desktop) */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden xl:flex items-center gap-1">
             {navigation.map((item) => {
               const Icon = item.icon;
               return (
@@ -83,7 +83,7 @@ export const Navbar = () => {
             {/* Mobile Hamburger Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-slate-800 border border-gray-200 dark:border-slate-700"
+              className="xl:hidden p-2 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-slate-800 border border-gray-200 dark:border-slate-700"
               aria-label="Toggle Mobile Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -94,7 +94,7 @@ export const Navbar = () => {
 
       {/* Expandable Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-teal-100 dark:border-teal-900/40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl px-4 pt-3 pb-4 space-y-2 animate-fade-in shadow-xl">
+        <div className="xl:hidden border-t border-teal-100 dark:border-teal-900/40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl px-4 pt-3 pb-4 space-y-2 animate-fade-in shadow-xl">
           <div className="grid grid-cols-2 gap-2">
             {navigation.map((item) => {
               const Icon = item.icon;
