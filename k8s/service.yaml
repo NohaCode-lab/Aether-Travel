@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: aether-travel-frontend-service
+spec:
+  type: ClusterIP
+  selector:
+    app: aether-travel
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aether-travel-backend-service
+spec:
+  type: ClusterIP
+  selector:
+    app: aether-travel-backend
+  ports:
+    - port: 4000
+      targetPort: 4000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aether-travel-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - aethertravel.io
+        - api.aethertravel.io
+      secretName: aether-travel-tls
+  rules:
+    - host: aethertravel.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: aether-travel-frontend-service
+                port:
+                  number: 80
+    - host: api.aethertravel.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: aether-travel-backend-service
+                port:
+                  number: 4000
