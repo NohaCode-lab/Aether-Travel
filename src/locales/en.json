@@ -24,6 +24,18 @@
     "english": "English",
     "german": "Deutsch"
   },
+  "auth": {
+    "joinPlatform": "Join Aether-Travel AI Platform",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email address",
+    "password": "Password",
+    "createAccount": "Create account",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "signIn": "Sign in",
+    "register": "Register"
+  },
   "dashboard": {
     "title": "Welcome back",
     "subtitle": "Here is an overview of your AI-curated journeys and travel plans.",

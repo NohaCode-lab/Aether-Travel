@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Card } from '../../components/ui/Card';
 import { Input } from '../../components/ui/Input';
 import { Button } from '../../components/ui/Button';
@@ -9,6 +10,7 @@ import { ThemeToggle } from '../../components/shared/ThemeToggle';
 import { Logo } from '../../components/shared/Logo';
 
 export default function RegisterPage() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -27,7 +29,7 @@ export default function RegisterPage() {
       navigate('/');
     } catch (err: unknown) {
       console.error(err);
-      setError(err instanceof Error ? err.message : 'Registration failed');
+      setError(err instanceof Error ? err.message : t('common.error'));
     } finally {
       setLoading(false);
     }
@@ -48,7 +50,7 @@ export default function RegisterPage() {
         <div className="flex flex-col items-center justify-center text-center">
           <Logo size="lg" />
           <p className="text-gray-600 dark:text-teal-200/80 text-sm mt-3 font-medium">
-            Join Aether-Travel AI Platform
+            {t('auth.joinPlatform')}
           </p>
         </div>
 
@@ -62,7 +64,7 @@ export default function RegisterPage() {
 
             <div className="grid grid-cols-2 gap-3">
               <Input
-                label="First Name"
+                label={t('auth.firstName')}
                 type="text"
                 placeholder="Alex"
                 required
@@ -70,7 +72,7 @@ export default function RegisterPage() {
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <Input
-                label="Last Name"
+                label={t('auth.lastName')}
                 type="text"
                 placeholder="Schmidt"
                 required
@@ -80,7 +82,7 @@ export default function RegisterPage() {
             </div>
 
             <Input
-              label="Email address"
+              label={t('auth.email')}
               type="email"
               placeholder="name@example.com"
               required
@@ -88,7 +90,7 @@ export default function RegisterPage() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <Input
-              label="Password"
+              label={t('auth.password')}
               type="password"
               placeholder="••••••••"
               required
@@ -101,18 +103,18 @@ export default function RegisterPage() {
               className="w-full mt-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-bold py-2.5 rounded-xl shadow-lg shadow-teal-600/30 transition-all"
               isLoading={loading}
             >
-              {loading ? 'Creating account...' : 'Create account'}
+              {loading ? t('common.loading') : t('auth.createAccount')}
             </Button>
           </form>
         </Card>
 
         <p className="text-center text-gray-600 dark:text-gray-400 text-sm">
-          Already have an account?{' '}
+          {t('auth.alreadyHaveAccount')}{' '}
           <Link
             to="/login"
             className="text-teal-600 dark:text-teal-400 hover:underline font-bold"
           >
-            Sign in
+            {t('auth.signIn')}
           </Link>
         </p>
       </div>

@@ -24,6 +24,18 @@
     "english": "English",
     "german": "Deutsch"
   },
+  "auth": {
+    "joinPlatform": "Aether-Travel KI-Plattform beitreten",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "createAccount": "Konto erstellen",
+    "alreadyHaveAccount": "Bereits ein Konto?",
+    "dontHaveAccount": "Noch kein Konto?",
+    "signIn": "Anmelden",
+    "register": "Registrieren"
+  },
   "dashboard": {
     "title": "Willkommen zurück",
     "subtitle": "Hier ist eine Übersicht Ihrer von KI zusammengestellten Reisen und Reisepläne.",

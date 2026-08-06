@@ -35,7 +35,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-emerald-50 via-teal-50/70 to-sky-100 dark:from-slate-950 dark:via-teal-950/80 dark:to-blue-950 relative overflow-hidden">
-      {/* Dynamic Ambient Glow Orbs for Depth & Premium Aesthetics */}
+      {/* Dynamic Ambient Glow Orbs */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-emerald-500/20 dark:bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-cyan-500/20 dark:bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
 
@@ -61,7 +61,7 @@ export default function LoginPage() {
             )}
 
             <Input
-              label="Email"
+              label={t('auth.email')}
               type="email"
               placeholder="name@example.com"
               value={email}
@@ -69,7 +69,7 @@ export default function LoginPage() {
               required
             />
             <Input
-              label="Password"
+              label={t('auth.password')}
               type="password"
               placeholder="••••••••"
               value={password}
@@ -82,18 +82,18 @@ export default function LoginPage() {
               className="w-full mt-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-bold py-2.5 rounded-xl shadow-lg shadow-teal-600/30 transition-all"
               isLoading={isLoading}
             >
-              {isLoading ? t('common.loading') : t('nav.login')}
+              {isLoading ? t('common.loading') : t('auth.signIn')}
             </Button>
           </form>
         </Card>
 
         <p className="text-center text-gray-600 dark:text-gray-400 text-sm">
-          Don't have an account?{' '}
+          {t('auth.dontHaveAccount')}{' '}
           <Link
             to="/register"
             className="text-teal-600 dark:text-teal-400 hover:underline font-bold"
           >
-            {t('nav.register')}
+            {t('auth.register')}
           </Link>
         </p>
       </div>
