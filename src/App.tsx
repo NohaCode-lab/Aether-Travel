@@ -42,7 +42,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-200">
+        <div className="min-h-screen bg-gradient-to-br from-emerald-50/60 via-slate-50 to-teal-50/40 dark:from-slate-950 dark:via-teal-950/70 dark:to-blue-950 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
           <AppRoutes />
         </div>
       </BrowserRouter>

@@ -24,13 +24,13 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true }) => {
         <img
           src="/favicon.svg"
           alt="Aether-Travel Logo"
-          className={`${sizeClasses[size]} rounded-xl shadow-md transition-transform duration-300 group-hover:scale-105`}
+          className={`${sizeClasses[size]} rounded-xl shadow-lg shadow-teal-500/20 transition-transform duration-300 group-hover:scale-105`}
         />
-        <div className="absolute inset-0 rounded-xl bg-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity blur-xs" />
+        <div className="absolute inset-0 rounded-xl bg-teal-500/20 opacity-0 group-hover:opacity-100 transition-opacity blur-xs" />
       </div>
       {showText && (
         <span
-          className={`${textClasses[size]} bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight font-sans`}
+          className={`${textClasses[size]} bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-600 dark:from-teal-300 dark:via-emerald-400 dark:to-cyan-300 bg-clip-text text-transparent tracking-tight font-sans`}
         >
           Aether-Travel
         </span>

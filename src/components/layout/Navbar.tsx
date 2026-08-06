@@ -11,7 +11,7 @@ export const Navbar = () => {
   const { t } = useTranslation();
 
   return (
-    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/80 dark:border-gray-800/80 shadow-sm sticky top-0 z-40 transition-colors">
+    <header className="bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl border-b border-teal-100/80 dark:border-teal-900/40 shadow-sm sticky top-0 z-40 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Logo size="md" />
@@ -20,7 +20,7 @@ export const Navbar = () => {
             <ThemeToggle />
             <LanguageSwitcher />
             {user && (
-              <span className="text-xs text-gray-500 dark:text-gray-400 hidden md:inline font-mono">
+              <span className="text-xs text-teal-700/80 dark:text-teal-300/80 hidden md:inline font-mono">
                 {user.email}
               </span>
             )}

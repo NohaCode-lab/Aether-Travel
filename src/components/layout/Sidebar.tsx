@@ -18,7 +18,7 @@ export const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 p-4 hidden md:block flex-shrink-0">
+    <aside className="w-64 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-teal-100/80 dark:border-teal-900/40 p-4 hidden md:block flex-shrink-0">
       <nav className="space-y-1">
         {navigation.map((item) => {
           const Icon = item.icon;
@@ -30,8 +30,8 @@ export const Sidebar = () => {
               className={({ isActive }) =>
                 `group flex items-center gap-3 px-3 py-2.5 text-xs font-semibold rounded-xl transition-all ${
                   isActive
-                    ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-bold shadow-xs'
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white'
+                    ? 'bg-teal-50 dark:bg-teal-950/40 text-teal-600 dark:text-teal-300 font-bold border border-teal-200/60 dark:border-teal-800/40 shadow-xs'
+                    : 'text-gray-600 dark:text-gray-400 hover:bg-teal-50/50 dark:hover:bg-slate-800/60 hover:text-teal-700 dark:hover:text-teal-200'
                 }`
               }
             >

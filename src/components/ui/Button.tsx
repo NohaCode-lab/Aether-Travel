@@ -15,19 +15,19 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'inline-flex justify-center items-center font-medium rounded-md focus:outline-none transition-colors disabled:opacity-75 disabled:cursor-not-allowed';
+    'inline-flex justify-center items-center font-bold rounded-xl focus:outline-none transition-all duration-200 disabled:opacity-75 disabled:cursor-not-allowed active:scale-[0.98] shadow-sm';
 
   const variants = {
     primary:
-      'bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 border border-transparent',
+      'bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-600 hover:from-teal-700 hover:via-emerald-700 hover:to-cyan-700 text-white shadow-lg shadow-teal-500/25 border border-teal-500/20',
     secondary:
-      'bg-indigo-100 text-indigo-700 hover:bg-indigo-200 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 border border-transparent',
+      'bg-teal-50 dark:bg-teal-950/50 text-teal-700 dark:text-teal-300 hover:bg-teal-100 dark:hover:bg-teal-900/60 border border-teal-200 dark:border-teal-800',
     outline:
-      'bg-white text-gray-700 hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 border border-gray-300',
+      'bg-white/80 dark:bg-slate-800/80 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-700 border border-gray-200 dark:border-slate-700 shadow-sm',
   };
 
   const sizes = {
-    sm: 'px-3 py-1.5 text-sm',
+    sm: 'px-3 py-1.5 text-xs',
     md: 'px-4 py-2 text-sm',
     lg: 'px-6 py-3 text-base',
   };
@@ -40,7 +40,7 @@ export const Button: React.FC<ButtonProps> = ({
     >
       {isLoading && (
         <svg
-          className="animate-spin -ml-1 mr-3 h-5 w-5"
+          className="animate-spin -ml-1 mr-2.5 h-4 w-4"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
