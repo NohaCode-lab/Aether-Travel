@@ -3,6 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { Button } from '../ui/Button';
 import { LanguageSwitcher } from '../shared/LanguageSwitcher';
 import { ThemeToggle } from '../shared/ThemeToggle';
+import { NotificationCenter } from '../shared/NotificationCenter';
 
 export const Navbar = () => {
   const { user, signOut } = useAuth();
@@ -19,6 +20,7 @@ export const Navbar = () => {
             </span>
           </div>
           <div className="flex items-center gap-3">
+            <NotificationCenter />
             <ThemeToggle />
             <LanguageSwitcher />
             {user && (

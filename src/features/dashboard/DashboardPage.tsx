@@ -7,22 +7,62 @@ import { Card } from '../../components/ui/Card';
 import { Loader } from '../../components/ui/Loader';
 import { EmptyState } from '../../components/common/EmptyState';
 import { Button } from '../../components/ui/Button';
+import { TravelMap } from '../../components/shared/TravelMap';
+import { MapPin, Sparkles } from 'lucide-react';
 
 export const DashboardPage: React.FC = () => {
   const { user } = useAuth();
   const { t } = useTranslation();
   const { trips, loading: tripsLoading } = useTrips(user?.id ?? null);
 
+  const mapMarkers = [
+    { id: 'm1', lat: 35.0116, lng: 135.7681, title: 'Kyoto Historic Tour', category: 'attraction' as const, description: 'Fushimi Inari Shrine & Bamboo Grove' },
+    { id: 'm2', lat: 35.0037, lng: 135.7772, title: 'Gion Ryokan Hotel', category: 'hotel' as const, description: 'Traditional Japanese Luxury Stay' },
+    { id: 'm3', lat: 35.0040, lng: 135.7700, title: 'Kaisou Gastronomy', category: 'restaurant' as const, description: 'Michelin Star Kaiseki Dining' },
+  ];
+
+  const mapRoute: [number, number][] = [
+    [35.0116, 135.7681],
+    [35.0037, 135.7772],
+    [35.0040, 135.7700],
+  ];
+
   return (
     <div className="animate-fade-in space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          {t('dashboard.title')}, {user?.user_metadata?.firstName || t('common.traveler')}!
-        </h1>
-        <p className="mt-1 text-base text-gray-600 dark:text-gray-400">
-          {t('dashboard.subtitle')}
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+            {t('dashboard.title')}, {user?.user_metadata?.firstName || t('common.traveler')}!
+          </h1>
+          <p className="mt-1 text-base text-gray-600 dark:text-gray-400">
+            {t('dashboard.subtitle')}
+          </p>
+        </div>
+        <Link to="/ai-chat">
+          <Button className="flex items-center gap-2">
+            <Sparkles className="w-4 h-4" /> Consult AI Concierge
+          </Button>
+        </Link>
       </div>
+
+      {/* Interactive OpenStreetMap Section */}
+      <Card className="p-5 space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="font-bold text-gray-900 dark:text-white text-lg flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+            Interactive Route Map & Attractions
+          </h3>
+          <span className="text-xs text-gray-400 font-mono">OpenStreetMap + Leaflet</span>
+        </div>
+        <TravelMap
+          center={[35.0116, 135.7681]}
+          zoom={13}
+          markers={mapMarkers}
+          routePath={mapRoute}
+          travelTime="18 mins walk"
+          distanceKm={3.4}
+        />
+      </Card>
 
       <div className="mt-8">
         <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">

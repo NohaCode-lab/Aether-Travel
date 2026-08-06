@@ -5,11 +5,16 @@ import { DashboardLayout } from '../components/layout/DashboardLayout';
 import { useAuth } from '../hooks/useAuth';
 import { Loader } from '../components/ui/Loader';
 import { ProtectedRoute } from '../features/auth/ProtectedRoute';
-import TripPlannerPage from '../features/trip-planner/TripPlannerPage';
-import { DestinationsPage } from '../features/destination-discovery/DestinationsPage';
+
 import { DashboardPage } from '../features/dashboard/DashboardPage';
-import { ProfilePage } from '../features/profile/ProfilePage';
+import { DestinationsPage } from '../features/destination-discovery/DestinationsPage';
+import TripPlannerPage from '../features/trip-planner/TripPlannerPage';
 import AIChatPage from '../features/ai-chat/AIChatPage';
+import DocumentVaultPage from '../features/documents/DocumentVaultPage';
+import FlightTrackerPage from '../features/flight-tracker/FlightTrackerPage';
+import AnalyticsPage from '../features/analytics/AnalyticsPage';
+import AdminPanelPage from '../features/admin/AdminPanelPage';
+import { ProfilePage } from '../features/profile/ProfilePage';
 
 export const AppRoutes = () => {
   const { loading } = useAuth();
@@ -68,6 +73,46 @@ export const AppRoutes = () => {
         }
       />
       <Route
+        path="/documents"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <DocumentVaultPage />
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/flight-tracker"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <FlightTrackerPage />
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/analytics"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <AnalyticsPage />
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <AdminPanelPage />
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/profile"
         element={
           <ProtectedRoute>
@@ -81,4 +126,4 @@ export const AppRoutes = () => {
   );
 };
 
-export default AppRoutes;
+export default AppRoutes;
