@@ -8,6 +8,7 @@ import { authService } from './authService';
 import { LanguageSwitcher } from '../../components/shared/LanguageSwitcher';
 import { ThemeToggle } from '../../components/shared/ThemeToggle';
 import { Logo } from '../../components/shared/Logo';
+import { Sparkles } from 'lucide-react';
 
 export default function RegisterPage() {
   const { t } = useTranslation();
@@ -35,6 +36,13 @@ export default function RegisterPage() {
     }
   };
 
+  const handleDemoAccess = async () => {
+    setLoading(true);
+    await authService.login('demo@aethertravel.io', 'DemoPass2026!');
+    navigate('/');
+    setLoading(false);
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-emerald-50 via-teal-50/70 to-sky-100 dark:from-slate-950 dark:via-teal-950/80 dark:to-blue-950 relative overflow-hidden">
       {/* Dynamic Ambient Glow Orbs */}
@@ -54,7 +62,22 @@ export default function RegisterPage() {
           </p>
         </div>
 
-        <Card className="p-6 backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 border border-teal-100 dark:border-teal-900/50 shadow-2xl shadow-teal-950/10 dark:shadow-teal-900/20">
+        <Card className="p-6 backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 border border-teal-100 dark:border-teal-900/50 shadow-2xl shadow-teal-950/10 dark:shadow-teal-900/20 space-y-4">
+          <Button
+            onClick={handleDemoAccess}
+            type="button"
+            className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:to-pink-700 text-white font-extrabold py-3 rounded-xl shadow-lg shadow-purple-500/25 flex items-center justify-center gap-2 border border-purple-400/30"
+          >
+            <Sparkles className="w-5 h-5 text-yellow-300" />
+            Explore Recruiter Live Demo
+          </Button>
+
+          <div className="relative flex py-1 items-center">
+            <div className="flex-grow border-t border-gray-200 dark:border-slate-800"></div>
+            <span className="flex-shrink mx-4 text-xs font-semibold uppercase tracking-wider text-gray-400">Or register</span>
+            <div className="flex-grow border-t border-gray-200 dark:border-slate-800"></div>
+          </div>
+
           <form className="space-y-4" onSubmit={handleRegister}>
             {error && (
               <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl dark:bg-red-950/40 dark:text-red-300 dark:border-red-800">
@@ -100,7 +123,8 @@ export default function RegisterPage() {
 
             <Button
               type="submit"
-              className="w-full mt-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-bold py-2.5 rounded-xl shadow-lg shadow-teal-600/30 transition-all"
+              variant="secondary"
+              className="w-full font-bold py-2.5 rounded-xl"
               isLoading={loading}
             >
               {loading ? t('common.loading') : t('auth.createAccount')}
