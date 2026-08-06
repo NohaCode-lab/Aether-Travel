@@ -1,13 +1,27 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-const supabaseUrl =
-  import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_URL.trim() !== ""
-    ? import.meta.env.VITE_SUPABASE_URL
-    : "https://aether-travel.supabase.co";
+const rawUrl = import.meta.env.VITE_SUPABASE_URL;
+const rawKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-const supabaseKey =
-  import.meta.env.VITE_SUPABASE_ANON_KEY && import.meta.env.VITE_SUPABASE_ANON_KEY.trim() !== ""
-    ? import.meta.env.VITE_SUPABASE_ANON_KEY
-    : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFldGhlciIsInJvbGUiOiJhbm9uIn0.mock-key-for-dev";
+const isConfigured = Boolean(rawUrl && rawUrl.trim() !== "" && rawKey && rawKey.trim() !== "");
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+if (!isConfigured) {
+  console.warn(
+    "[Aether-Travel] Supabase environment variables (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY) are not set. Auth running in Local/Mock Mode."
+  );
+}
+
+// Create real client if configured, otherwise create graceful fallback mock client
+export const supabase: SupabaseClient = isConfigured
+  ? createClient(rawUrl!, rawKey!)
+  : ({
+      auth: {
+        getSession: async () => ({ data: { session: null }, error: null }),
+        onAuthStateChange: (_callback: any) => ({
+          data: { subscription: { unsubscribe: () => {} } },
+        }),
+        signInWithPassword: async () => ({ data: { user: null, session: null }, error: null }),
+        signUp: async () => ({ data: { user: null, session: null }, error: null }),
+        signOut: async () => ({ error: null }),
+      },
+    } as unknown as SupabaseClient);

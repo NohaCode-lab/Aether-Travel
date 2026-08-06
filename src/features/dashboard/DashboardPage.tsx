@@ -27,12 +27,14 @@ export const DashboardPage: React.FC = () => {
     [35.0040, 135.7700],
   ];
 
+  const firstName = (user as any)?.user_metadata?.firstName || (user as any)?.firstName || t('common.traveler');
+
   return (
     <div className="animate-fade-in space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-            {t('dashboard.title')}, {user?.user_metadata?.firstName || t('common.traveler')}!
+            {t('dashboard.title')}, {firstName}!
           </h1>
           <p className="mt-1 text-base text-gray-600 dark:text-gray-400">
             {t('dashboard.subtitle')}
@@ -45,7 +47,6 @@ export const DashboardPage: React.FC = () => {
         </Link>
       </div>
 
-      {/* Interactive OpenStreetMap Section */}
       <Card className="p-5 space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="font-bold text-gray-900 dark:text-white text-lg flex items-center gap-2">

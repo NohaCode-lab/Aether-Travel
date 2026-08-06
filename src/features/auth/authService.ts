@@ -9,7 +9,17 @@ export const authService = {
     });
     if (error) throw error;
     
-    useAuthStore.getState().setUser(data.user);
+    // In unconfigured mock mode, provide a valid fallback user session
+    const user = data?.user ?? {
+      id: 'usr-demo',
+      email,
+      user_metadata: { firstName: email.split('@')[0], lastName: 'Traveler' },
+      app_metadata: {},
+      aud: 'authenticated',
+      created_at: new Date().toISOString(),
+    };
+
+    useAuthStore.getState().setUser(user as any);
     return data;
   },
 
@@ -25,8 +35,17 @@ export const authService = {
       },
     });
     if (error) throw error;
-    
-    useAuthStore.getState().setUser(data.user);
+
+    const user = data?.user ?? {
+      id: 'usr-demo',
+      email,
+      user_metadata: { firstName, lastName },
+      app_metadata: {},
+      aud: 'authenticated',
+      created_at: new Date().toISOString(),
+    };
+
+    useAuthStore.getState().setUser(user as any);
     return data;
   },
 
