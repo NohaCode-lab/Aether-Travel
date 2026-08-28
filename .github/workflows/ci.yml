@@ -22,7 +22,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Run ESLint Check
         run: npm run lint
@@ -44,3 +44,4 @@ jobs:
           severity: 'CRITICAL,HIGH'
         env:
           TRIVY_SUPPRESS_OUTPUT: 'true'
+
