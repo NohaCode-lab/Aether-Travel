@@ -1,13 +1,21 @@
 ﻿# âœˆï¸ Aether-Travel
 
+[![React](https://img.shields.io/badge/React-18.x-20B2AA.svg?logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20.x-green.svg?logo=node.js&logoColor=white)](https://nodejs.org)
+[![Leaflet](https://img.shields.io/badge/Leaflet-Interactive%20Maps-199900.svg?logo=leaflet&logoColor=white)](https://leafletjs.com)
+[![Vitest](https://img.shields.io/badge/Vitest-Test%20Suite-yellow.svg?logo=vitest&logoColor=white)](https://vitest.dev)
+[![Playwright](https://img.shields.io/badge/Playwright-E2E%20Testing-45BA4B.svg?logo=playwright&logoColor=white)](https://playwright.dev)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-Manifests%20Ready-326CE5.svg?logo=kubernetes&logoColor=white)](https://kubernetes.io)
+[![Terraform](https://img.shields.io/badge/Terraform-IaC%20Ready-7B42BC.svg?logo=terraform&logoColor=white)](https://terraform.io)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+
 > **Enterprise AI Travel Intelligence SaaS Platform**  
 > **Interactive AI Travel Itinerary Planner & Multi-destination Routing System**
 
 [![CI Pipeline](https://github.com/NohaCode-lab/Aether-Travel/actions/workflows/ci.yml/badge.svg)](https://github.com/NohaCode-lab/Aether-Travel/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Release: v2.0.0](https://img.shields.io/badge/Release-v2.0.0-indigo.svg)](https://github.com/NohaCode-lab/Aether-Travel/releases)
-[![TypeScript: 5.7](https://img.shields.io/badge/TypeScript-5.7-blue.svg)](https://www.typescriptlang.org/)
-[![React: 19](https://img.shields.io/badge/React-19.0-61dafb.svg)](https://react.dev/)
 
 ---
 
