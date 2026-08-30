@@ -14,6 +14,15 @@ Aether-Travel is a modern, full-stack **travel planning SaaS platform** designed
 
 ---
 
+## 🔗 Project Links
+
+* **Live Demo (Frontend):** `https://aether-travel.vercel.app` *(Placeholder — to be updated upon live Vercel deploy)*
+* **API Gateway (Backend):** `https://aether-travel-backend.onrender.com` *(Placeholder — to be updated upon live Render deploy)*
+* **GitHub Repository:** `https://github.com/NohaCode-lab/Aether-Travel`
+* **Deployment Architecture:** [Production Deployment Architecture](#-production-deployment)
+
+---
+
 ## 🌟 Product Overview & Core Features
 
 - 🗺️ **Interactive Itinerary Builder:** Multi-day travel schedule creation with dynamic drag-and-drop ordering and budgeting.
@@ -125,6 +134,72 @@ npm run typecheck
 # Run ESLint linter
 npm run lint
 ```
+
+---
+
+# 🚀 Production Deployment
+
+## Architecture Overview
+
+```text
+                           AETHER-TRAVEL PRODUCTION TOPOLOGY
+                                            │
+    ┌───────────────────────────────────────┼───────────────────────────────────────┐
+    ▼                                       ▼                                       ▼
+[ Vercel Edge Global CDN ]          [ Render Web Service ]                  [ Supabase / Cloud Postgres ]
+React 19 + Vite 5 Frontend          Node.js Express API (Port 4000)         Managed PostgreSQL Database
+(https://aether-travel.vercel.app)  (https://aether-travel-backend.onrender.com) (https://supabase.com)
+ ├── Vite SPA Bundle (dist/)         ├── Express REST Endpoints              ├── Traveler Profiles & Auth
+ ├── vercel.json SPA Rewrites        ├── OpenAI Backend Proxy                ├── Trip Itineraries & Routes
+ ├── Leaflet Geospatial Maps         ├── Zod Request Validation              └── Stored Vault Documents
+ └── Tri-Lingual i18n (EN/DE/AR)     └── Server-Side Secret Protection
+```
+
+## Live Application
+
+* **Frontend:** `https://aether-travel.vercel.app` *(Placeholder — to be updated upon live Vercel deploy)*
+* **Backend API:** `https://aether-travel-backend.onrender.com` *(Placeholder — to be updated upon live Render deploy)*
+* **Database:** [Supabase Managed PostgreSQL](https://supabase.com) *(Cloud-managed, credentials isolated)*
+
+---
+
+## 🛠️ Step-by-Step Deployment Instructions
+
+### 1. Database — Supabase
+1. Create a project on [Supabase](https://supabase.com).
+2. Copy the **Connection URI (Pooler)** from **Project Settings → Database**.
+3. Run database migrations:
+   ```bash
+   cd backend
+   npx prisma migrate dev
+   ```
+
+### 2. Backend API — Render
+1. In [Render](https://render.com), click **New Web Service** and select this repository (or use [`render.yaml`](render.yaml)).
+2. Configure settings:
+   - **Root Directory:** `backend`
+   - **Build Command:** `npm install && npx prisma generate && npm run build`
+   - **Start Command:** `npm start`
+   - **Health Check Path:** `/health`
+3. Set Environment Variables in Render:
+   ```text
+   NODE_ENV       = production
+   PORT           = 4000
+   CORS_ORIGIN    = https://aether-travel.vercel.app
+   DATABASE_URL   = postgresql://user:password@aws-0-eu.pooler.supabase.com:6543/postgres
+   JWT_SECRET     = your_secure_jwt_secret_key_here
+   OPENAI_API_KEY = your_openai_api_key_here
+   ```
+
+### 3. Frontend SPA — Vercel
+1. In [Vercel](https://vercel.com), click **Add New Project** and import `Aether-Travel`.
+2. Framework is automatically detected as **Vite** (`dist`).
+3. Set Environment Variables in Vercel:
+   ```text
+   VITE_BACKEND_URL  = https://aether-travel-backend.onrender.com
+   VITE_SUPABASE_URL = https://your-project.supabase.co
+   ```
+4. Click **Deploy**. The root [`vercel.json`](vercel.json) handles client-side routing.
 
 ---
 
