@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { Loader } from '../../components/ui/Loader';
-import { useAuthStore } from '../../store/authStore';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -9,7 +9,6 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { session, loading } = useAuth();
-  const { setUser } = useAuthStore();
 
   if (loading) {
     return (
@@ -19,18 +18,10 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     );
   }
 
-  // Demo presentation guarantee: if no active session exists, initialize demo session
   if (!session) {
-    const demoUser = {
-      id: 'usr-demo',
-      email: 'alex.schmidt@aethertravel.io',
-      user_metadata: { firstName: 'Alexander', lastName: 'Schmidt' },
-      app_metadata: {},
-      aud: 'authenticated',
-      created_at: new Date().toISOString(),
-    };
-    setUser(demoUser as any);
+    return <Navigate to="/login" replace />;
   }
 
   return <>{children}</>;
 };
+

@@ -26,25 +26,18 @@ export default function App() {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      const activeUser = session?.user ?? {
-        id: 'usr-demo',
-        email: 'alex.schmidt@aethertravel.io',
-        user_metadata: { firstName: 'Alexander', lastName: 'Schmidt' },
-        app_metadata: {},
-        aud: 'authenticated',
-        created_at: new Date().toISOString(),
-      };
-
-      setUser(activeUser as any);
+      setUser(session?.user ?? null);
+      setLoading(false);
+    }).catch(() => {
+      setUser(null);
       setLoading(false);
     });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        setUser(session.user);
-      }
+      setUser(session?.user ?? null);
+      setLoading(false);
     });
 
     return () => subscription.unsubscribe();
